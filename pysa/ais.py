@@ -50,7 +50,10 @@ def partition_function_post(solution: pd.DataFrame):
 
     beta_idx = list(range(len(cur_betas)))
     import numpy as np
-    log_omegas += [get_log_omega(np.array(cur_betas), np.array(beta_idx), np.array(cur_energies))]
+    log_omegas += [
+        get_log_omega(np.array(cur_betas), np.array(beta_idx),
+                      np.array(cur_energies))
+    ]
 
     logZ0 = n * np.log(2)  # assuming the uniform distribution with all
     #unnormalized probabilities set to one
