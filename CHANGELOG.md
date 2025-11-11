@@ -57,6 +57,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - Python version support
   - License badge
 
+- **Test Coverage for AIS** (`tests/test_ais.py`): Comprehensive test suite for AIS functions
+  - `test_partition_function_post_basic`: Tests multi-sample processing
+  - `test_get_log_omega_single`: Tests single log omega calculation
+  - `test_get_log_omega_requires_zero_beta`: Tests validation of zero beta requirement
+  - `test_omegas_to_partition`: Tests partition function calculation from omegas
+  - `test_partition_function_post_consistency`: Tests deterministic behavior
+
 ### Changed
 
 #### Updated Existing Workflows
@@ -103,6 +110,48 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
     - Coverage report generation
     - List of all workflows
   - Updated installation instructions to reference new requirements
+
+### Fixed
+
+#### Critical Bug Fixes
+- **AIS Partition Function** (`pysa/ais.py`): Fixed critical indentation bug in `partition_function_post`
+  - Code for calculating `beta_idx` and `log_omegas` was incorrectly dedented outside the for loop
+  - This caused only the last sample to be processed instead of all samples
+  - Now correctly processes all samples and accumulates their contributions
+  - Added `beta_idx` parameter to `get_log_omega` call (was missing, causing incorrect results)
+
+#### Code Quality Fixes
+- **Docstring Escape Sequences** (`pysa/ais.py`): Fixed deprecation warnings
+  - Changed docstrings containing LaTeX backslashes (`\pm`) from `'''` to `r'''` (raw strings)
+  - Prevents SyntaxWarning for invalid escape sequences in Python 3.12+
+  
+- **Redundant Import** (`pysa/ais.py`): Removed duplicate numpy import
+  - Removed local `import numpy as np` inside `partition_function_post` function
+  - Uses module-level numpy import instead
+
+#### Documentation Fixes
+- **CI Documentation** (`docs/CI_INFRASTRUCTURE.md`): Corrected dependency categorization
+  - Moved pytest from "Core Dependencies" to "CI-Specific Dependencies"
+  - Reflects actual project structure where pytest is in requirements-dev.txt
+
+- **README Typo**: Fixed typo in environment file reference
+  - Changed "envinronment.yml" to "environment.yml"
+
+#### CI/CD Fixes
+- **Coverage Artifacts**: Added `.coverage`, `coverage.xml`, `htmlcov/`, `.pytest_cache/` to `.gitignore`
+  - Prevents accidental commits of generated coverage files
+
+- **Codecov Token**: Added `CODECOV_TOKEN` to all codecov upload actions
+  - Ensures reliable coverage uploads without rate limiting
+  - Applied to `python-pytest.yml`, `ci.yml`, and `coverage.yml`
+
+- **Dependency Management**: Removed pytest from runtime dependencies
+  - Moved from `requirements.txt` to `requirements-dev.txt`
+  - pytest is a development/testing tool, not a runtime requirement
+
+- **Coverage Summary Optimization**: Improved coverage summary generation in `coverage.yml`
+  - Changed from re-running pytest to using `coverage report` command
+  - Faster execution and more efficient resource usage
 
 ### Deprecated
 - Python 3.7 support (reached EOL June 2023)
