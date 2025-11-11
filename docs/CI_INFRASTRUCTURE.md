@@ -89,10 +89,10 @@ The CI system tests against the following Python versions:
 - numba
 - pandas
 - tqdm
-- pytest
 - more_itertools
 
 ### CI-Specific Dependencies
+- pytest: Testing framework
 - pytest-cov: Coverage reporting
 - pytest-xdist: Parallel test execution
 - yapf: Code formatting
