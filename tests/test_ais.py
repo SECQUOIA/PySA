@@ -45,8 +45,12 @@ def test_partition_function_post_basic():
     ]
 
     # Create states (required by the function to get n)
-    states = [[np.array([1, -1, 1, -1])
-               for _ in range(len(temps_sample))]
+    # Use n to create states with alternating spins
+    states = [[
+        np.array([1 if i % 2 == 0 else -1
+                  for i in range(n)])
+        for _ in range(len(temps_sample))
+    ]
               for _ in range(num_samples)]
 
     # Create DataFrame
