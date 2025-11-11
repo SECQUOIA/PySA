@@ -33,8 +33,6 @@ def partition_function_post(solution: pd.DataFrame):
     is.  Note that this will improve in accuracy the larger num_replicas
     and num_reads was.  This function also requires that one of the
     beta values used by the annealer was 0'''
-
-    import numpy as np
     
     # Extract information from the DataFrame
     n = len(solution["states"][0][0])  # number of bits
