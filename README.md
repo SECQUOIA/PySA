@@ -45,7 +45,7 @@ pip install pysa.zip
 ```
 or by using `conda`:
 ```
-conda env create -f envinronment.yml
+conda env create -f environment.yml
 ```
 
 ## Testing and CI
