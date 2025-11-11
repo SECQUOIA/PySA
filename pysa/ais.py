@@ -34,6 +34,8 @@ def partition_function_post(solution: pd.DataFrame):
     and num_reads was.  This function also requires that one of the
     beta values used by the annealer was 0'''
 
+    import numpy as np
+    
     # Extract information from the DataFrame
     n = len(solution["states"][0][0])  # number of bits
     temps = solution["temps"]
@@ -48,12 +50,11 @@ def partition_function_post(solution: pd.DataFrame):
         cur_betas = 1 / cur_temps
         cur_energies = energies[s]
 
-    beta_idx = list(range(len(cur_betas)))
-    import numpy as np
-    log_omegas += [
-        get_log_omega(np.array(cur_betas), np.array(beta_idx),
-                      np.array(cur_energies))
-    ]
+        beta_idx = list(range(len(cur_betas)))
+        log_omegas += [
+            get_log_omega(np.array(cur_betas), np.array(beta_idx),
+                          np.array(cur_energies))
+        ]
 
     logZ0 = n * np.log(2)  # assuming the uniform distribution with all
     #unnormalized probabilities set to one
