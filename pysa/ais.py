@@ -139,7 +139,7 @@ def omegas_to_partition(log_omegas: Vector, logZ0: float):
 
 
 def uniform_prob_initialization(n: int, problem_type: str, initial_args=None):
-    '''Randomly initializes a single state of length n.  This returns a 
+    r'''Randomly initializes a single state of length n.  This returns a 
     vector representing the randomly initialized state
     Currently supports problem_type: "ising" -> randomly chooses \pm 1
                                      "qubo" -> randomly chooses 0 or 1'''
@@ -179,7 +179,7 @@ def uniform_partition_fun(n: int):
 def bernoulli_prob_initialization(n: int,
                                   problem_type: str,
                                   initial_args=[0.5]):
-    '''Randomly initializes a single state of length n.  This returns a 
+    r'''Randomly initializes a single state of length n.  This returns a 
     vector representing the randomly initialized state
     Currently supports problem_type: "ising" -> randomly chooses \pm 1
                                      "qubo" -> randomly chooses 0 or 1
